@@ -4,26 +4,22 @@ using namespace std;
 
 
 int main(void){
-    Matrix<int> m(3,4);
 
-    cout << m.rows() << endl;
-    cout << m.columns() << endl;
+    Matrix<double> m(3,4);
 
-
-    for (int i = 0; i < 3;i++){
-        for(int j = 0; j < 4; j++){
-            m.set(i,j,i+j);
-        }
-    }
-
-    print_m(m);
     RandomGen gen;
 
+    m.randomize(gen,0,1);
 
-    cout << gen.uniform(2.0,6.0) << endl;
+    Matrix<double> j(3,5);
 
-    cout << gen.uniformi(2,7) << endl;
-    
-    
+
+    j.randomize(gen,0,1);
+
+
+    print_m(m);
+    print_m(j);
+
+    print_m(m+j);
     return 0;
 }

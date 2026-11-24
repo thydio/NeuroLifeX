@@ -125,7 +125,13 @@ class Matrix{
             return get(row,column);
         }
         
+        void delm(int row,int column){
+            if(column >= columns_ || row >= rows_|| row < 0 || column < 0){
+                throw std::out_of_range("Matrix index out of range");
+            }
 
+            std::cout << data[row * columns_ + column] << std::endl;
+        }
         
         Matrix operator+(const Matrix& other) const{
             if (this->size() != other.size()){
@@ -209,13 +215,34 @@ class Matrix{
         }
 
         Matrix operator*(const Matrix& other) const{
-            if(other.rows() != this->columns()){
-                throw std::invalid_argument("Matrix sizes don't fit for multiplication");
+
+            int A = this->rows_;
+            int B = this->columns_;
+            int C = other.columns();
+            
+
+            if(other.rows() != B){
+                throw std::invalid_argument("Matricies not fit for multiplication");
             }
+            Matrix m(A,C);
+            for (int i = 0; i < A;i++){
+                for(int k = 0;k < C;k++){
+                     
+                    for(int j = 0; j < B;j++){
+                       
+                        m(i,k) += other(j,k) * (*this)(i,j);
+
+                    }
+                }
+            }
+            return m;
 
             
-            Matrix m(other.rows(),this->columns;)
+            
         }
+
+
+       
 
 };
 
